@@ -3,6 +3,7 @@ const { Component } = React;
 const { ViewPropTypes } = ReactNative = require('react-native');
 const createReactClass = require('create-react-class');
 const PropTypes = require('prop-types');
+import ViewPager from '@react-native-community/viewpager';
 const {
   Dimensions,
   View,
@@ -13,21 +14,15 @@ const {
   InteractionManager,
 } = ReactNative;
 
-const ViewPagerAndroid = require('@react-native-community/viewpager');
 const TimerMixin = require('react-timer-mixin');
-const ViewPager = require('@react-native-community/viewpager');
 
 const SceneComponent = require('./SceneComponent');
 const DefaultTabBar = require('./DefaultTabBar');
 const ScrollableTabBar = require('./ScrollableTabBar');
 
-function AnimatedViewPagerAndroid() {
-  if (Platform.OS === 'android') {
-    return Animated.createAnimatedComponent(ViewPager);
-  }
-
-  return undefined;
-}
+const AnimatedViewPagerAndroid = Platform.OS === 'android' ?
+  Animated.createAnimatedComponent(ViewPager) :
+  undefined;
 
 const ScrollableTabView = createReactClass({
   mixins: [TimerMixin, ],
