@@ -21,9 +21,13 @@ const SceneComponent = require('./SceneComponent');
 const DefaultTabBar = require('./DefaultTabBar');
 const ScrollableTabBar = require('./ScrollableTabBar');
 
-const AnimatedViewPagerAndroid = Platform.OS === 'android' ?
-  Animated.createAnimatedComponent(ViewPager) :
-  undefined;
+function AnimatedViewPagerAndroid() {
+  if (Platform.OS === 'android') {
+    return Animated.createAnimatedComponent(ViewPager);
+  }
+
+  return undefined;
+}
 
 const ScrollableTabView = createReactClass({
   mixins: [TimerMixin, ],
